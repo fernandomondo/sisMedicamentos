@@ -1,0 +1,24 @@
+create table produtos(
+ codProduto int not null primary key,
+ nome varchar(100) not null
+ 
+
+);
+
+create table produtos(
+ codProduto int not null primary key,
+ nome varchar(100) not null
+ 
+
+);
+
+create table produtos(
+ codProduto int not null primary key,
+ nome varchar(100) not null
+ 
+
+);
+
+insert into produtos values (1,'paracetamol');
+insert into produtos values (2,'elixir');
+insert into produtos values (3,'xarope');
