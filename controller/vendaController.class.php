@@ -35,10 +35,10 @@ class VendaController {
 	   	$venda->setQuantidade((int)$_POST["quantidade"]);
    		$venda->setValor((float)$_POST["valor"]);
    		
-   		$validator = new VendaValidator();
+   		$validator = new VendaValidator($this->vendaDao, $this->produtoDao);
    		
    		$errors = $validator->validate($venda);
-   		   		
+   			   		
    		if(count($errors) > 0)
    			return (object) array("errors" => $errors,
    								  "venda" => $venda,

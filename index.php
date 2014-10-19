@@ -37,7 +37,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 			<form action="index.php" method="post">
 				<div class="form-group">
 					<label for="nroVenda">NroVenda:</label>
-					<input type="text" class="form-control" name="nroVenda" id="nroVenda" value="" maxlength="50" />
+					<input type="text" class="form-control" name="nroVenda" id="nroVenda" value="" maxlength="50" required />
 				</div>
 				<div class="form-group">
 					<label for="codProduto">Produto:</label>
@@ -50,25 +50,31 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 				
 				<div class="form-group">
 					<label for="valor">Valor:</label>
-					<input type="number" step="0.1" class="form-control" name="valor" id="valor" value="" maxlength="10" min="0" />
+					<input type="number" step="0.01" class="form-control" name="valor" id="valor" value="" maxlength="10" min="0" required />
 				</div>
 				<div class="form-group">
 					<label for="quantidade">Quantidade:</label>
-					<input type="number" step="1" class="form-control" name="quantidade" id="quantidade" value="" maxlength="50" min="0" />
+					<input type="number" step="1" class="form-control" name="quantidade" id="quantidade" value="" maxlength="50" min="0" required />
 				</div>
 				<div class="form-group">
 					<label for="desconto">Desconto:</label>
-					<input type="number" step="0.1" class="form-control" name="desconto" id="desconto" value="" maxlength="50" />
+					<input type="number" step="0.01" class="form-control" name="desconto" id="desconto" value="" maxlength="50" required />
 				</div>
 				
-				<ul>
-				<?php foreach($model->errors as $error){ ?>
-					<li><?php echo $error;  ?></li>
+				<?php if(count($model->errors) > 0) {?>
+					<div class="alert alert-warning">
+					 	<button type="button" class="close" data-dismiss="alert">×</button>				
+						<ul>
+						<?php foreach($model->errors as $error){ ?>
+							<li><?php echo $error;  ?></li>
+						<?php }  ?>
+						</ul>
+					</div>
 				<?php }  ?>
-				</ul>
 				
 				<?php if(isset($model->sucesso)) {?>
 					<p class="alert alert-success">
+					 	<button type="button" class="close" data-dismiss="alert">×</button>
 						Venda salva com sucesso! Valor total da venda: R$ <?php echo (number_format($model->total , 2, ",", "."));?>
 					</p>				
 				<?php } ?>
@@ -77,5 +83,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST")
 			</form>
 		</div>
 	</div>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
 </body>
 </html>
