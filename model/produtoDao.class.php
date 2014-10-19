@@ -1,6 +1,7 @@
 <?php
 
 include_once("model/dao.class.php");
+include_once("model/produtoBo.class.php");
 
 class produtoDao extends Dao {
 
@@ -11,19 +12,19 @@ class produtoDao extends Dao {
 
 	public function retornarTodos() {
 
-		$rows = parent::find("id, nome", "");
-		
+		$qtdLinhas = $this->find("codProduto, nome", "");
+		$rows = $this->getRecordSet();
+				
 		$listaProdutos = array();
 		
-		foreach ($rows as $row) {
-			
+		foreach ($rows as $row) {			
 			$produto = new ProdutoBo();
-			$produto->setCodProduto($row["id"]);			
+			$produto->setCodProduto($row["codProduto"]);			
 			$produto->setNome($row["nome"]);
-			$listaProdutos->add($produto);
+			array_push($listaProdutos, $produto);			
 		}
 		
-		return $produto;
+		return $listaProdutos;
 
 	}
 

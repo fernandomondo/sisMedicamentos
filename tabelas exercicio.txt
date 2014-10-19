@@ -1,23 +1,24 @@
-create table produtos(
- codProduto int not null primary key,
- nome varchar(100) not null
- 
+show databases;
 
-);
+create database dbmedicamentos;
 
-create table produtos(
- codProduto int not null primary key,
- nome varchar(100) not null
- 
+use dbmedicamentos;
 
-);
+show tables;
 
 create table produtos(
  codProduto int not null primary key,
  nome varchar(100) not null
- 
-
 );
+
+create table Vendas(
+ nroVenda int not null primary key,
+ codProduto int not null,
+ valor decimal(10,2) not null, 
+ quantidade int not null,
+ desconto decimal not null,
+ foreign key (codProduto) references produtos(codProduto)
+ );
 
 insert into produtos values (1,'paracetamol');
 insert into produtos values (2,'elixir');

@@ -1,11 +1,11 @@
 <?php
 	class Connection
 	{
-		private static $conn;
+		public static $conn;
 		private static $hostName="127.0.0.1";
 		private static $dataBaseName="dbmedicamento";
 		private static $userName="root";
-		private static $password="root";
+		private static $password="123";
 		
 		//método para conectar no bd
 		public static function connect()

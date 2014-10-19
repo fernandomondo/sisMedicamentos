@@ -1,5 +1,6 @@
 <?php
 class VendaBo {
+	
 	private $nroVenda;
 	private $codProduto;
 	private $valor;
@@ -44,6 +45,12 @@ class VendaBo {
 
 	public function setDesconto($desconto) {
 		$this->desconto = $desconto;
+	}
+	
+	public function getTotal(){
+		$total =  $this->getValor() * $this->getQuantidade();
+		
+		return $total - ($total * $this->getDesconto()); 
 	}
 
 }

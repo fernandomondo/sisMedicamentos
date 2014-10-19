@@ -1,23 +1,26 @@
 <?php
 
 include_once("model/produtoDao.class.php");
-
+include_once("model/vendaDao.class.php");
+include_once("model/vendaBo.class.php");
+include_once("model/vendaValidator.class.php");
 
 class VendaController {
 
 	private $produtoDao;
+	private $vendaDao;
 
 	public function __construct(){
-		  	$this->produtoDao = new ProdutoDao();
-   	
+		  	$this->produtoDao = new ProdutoDao();   	
+		  	$this->vendaDao = new VendaDao();
 	}
 
    public function executeGet(){  	
    	
  
    	$model = array();
-   	
-   	 $model["produtos"] = $produtoDao->retornarTodos();   	
+   	$model["errors"] = array(); //no get nÃ£o tem erros ainda por isso um array vazio
+   	 $model["produtos"] = $this->produtoDao->retornarTodos();   	
   
    	  return (object) $model;   	
    }
@@ -26,24 +29,23 @@ class VendaController {
     public function executePost(){
    	
    		$venda = new VendaBo();
-   		$venda->setCodProduto($_POST["codProduto"]);
-	   	$venda->setDesconto($_POST["desconto"]);
-	   	$venda->setNroVenda($_POST["NroVenda"]);
-	   	$venda->setQuantidade($_POST["quantidade"]);
-   		$venda->setValor($_POST["valor"]);
+   		$venda->setCodProduto((int)$_POST["codProduto"]);
+	   	$venda->setDesconto((float)$_POST["desconto"]);
+	   	$venda->setNroVenda((int)$_POST["nroVenda"]);
+	   	$venda->setQuantidade((int)$_POST["quantidade"]);
+   		$venda->setValor((float)$_POST["valor"]);
    		
    		$validator = new VendaValidator();
    		
    		$errors = $validator->validate($venda);
-   		
-   		
-   		if(count($error) > 0)
+   		   		
+   		if(count($errors) > 0)
    			return (object) array("errors" => $errors,
    								  "venda" => $venda,
    								  "produtos" => $this->produtoDao->retornarTodos());
    		
    		
-   		//se chegou aqui é porque não tem errors
+   		//se chegou aqui ï¿½ porque nï¿½o tem errors
    		
    		 $this->vendaDao->salvarVenda($venda);
    		 

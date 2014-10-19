@@ -21,7 +21,7 @@
 			        ($values)";
 			//inserir os dados na tabela
 			$result=mysql_query($sql) or die("<h3>Erro não foi possível gravar os dados na tabela de $this->tableName. 
-			   Verifique os dados informados!</h3>");
+			   Verifique os dados informados!</h3>" . mysql_errno(Connection::$conn) . ": " . mysql_error(Connection::$conn	) . "\n");
 			//busca a quantidade de linhas afetadas pelo comando SQL
 
 			$rows_affected = mysql_affected_rows();
@@ -95,7 +95,9 @@
 			        $this->tableName  
 					 $filter ";	
 		 	
-			$this->rs=mysql_query($sql) or die("Erro ao consultar");
+			$this->rs=mysql_query($sql)
+			or die("Erro ao consultar" . mysql_errno(Connection::$conn) . ": " . mysql_error(Connection::$conn	) . "\n");
+			
 			$this->rowsSelectaffected = mysql_affected_rows();
 			
 			Connection::disconnect();

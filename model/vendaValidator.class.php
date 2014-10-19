@@ -7,8 +7,9 @@ class VendaValidator {
     	$erros = array();
     	
     	if(!is_numeric($vendaBo->getNroVenda()))
-    		$erro["nroVenda"] = "Não é um número. Digite novamente!";
+    		$erro["nroVenda"] = "Nï¿½o ï¿½ um nï¿½mero. Digite novamente!";
     	
+    	   	
     	return $erros;    	
     }
 }
